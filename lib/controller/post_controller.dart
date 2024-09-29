@@ -24,9 +24,13 @@ class PostController extends GetxController {
     var connectivityResult = await Connectivity().checkConnectivity();
 
     if (connectivityResult == ConnectivityResult.none) {
+      // No internet connection, fetch posts from the database
+      print("No internet connection. Loading data from local database.");
       isOffline(true);
       await fetchPostsFromDatabase();
     } else {
+      // Internet connection is available, fetch posts from API
+      print("Internet connection available. Loading data from API.");
       isOffline(false);
       await fetchPostsFromApi();
     }
@@ -53,6 +57,7 @@ class PostController extends GetxController {
     } catch (e) {
       isLoading(false);
       print("Error fetching posts from API: $e");
+      await fetchPostsFromDatabase();
     }
   }
 

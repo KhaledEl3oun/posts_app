@@ -26,7 +26,8 @@ class PostListScreen extends StatelessWidget {
               Icons.refresh,
               color: Colors.white,
             ),
-            onPressed: () => _postController.fetchPosts(),
+            onPressed: () =>
+             _postController.fetchPosts(),
           )
         ],
       ),
